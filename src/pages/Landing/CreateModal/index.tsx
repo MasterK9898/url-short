@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Col, Form, InputGroup, Modal } from "react-bootstrap";
-import "./index.scss";
+// import "./index.scss";
 import type { URLPayload, URLUnit } from "../interface";
 
 const mock = (payload: URLPayload): Promise<URLUnit> =>
@@ -10,19 +10,21 @@ const mock = (payload: URLPayload): Promise<URLUnit> =>
     }, 1000)
   );
 interface CreateModalProps {
-  show: boolean;
+  onClose: () => void;
 }
 
-const CreateModal: React.FunctionComponent<CreateModalProps> = ({ show }) => {
+const CreateModal: React.FunctionComponent<CreateModalProps> = ({
+  onClose,
+}) => {
   const [validated, setValidated] = React.useState(false);
 
   const [data, setData] = React.useState<URLPayload>({ url: "", id: "" });
 
-  const handleClose = () => {
-    setData({ url: "", id: "" });
-    // setShow(false);
-    setValidated(false);
-  };
+  // const handleClose = () => {
+  //   setData({ url: "", id: "" });
+  //   // setShow(false);
+  //   setValidated(false);
+  // };
   // const handleShow = () => setShow(true);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,16 +33,18 @@ const CreateModal: React.FunctionComponent<CreateModalProps> = ({ show }) => {
 
     const res = await mock(data);
 
+    console.log(res);
+
     setValidated(true);
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show onHide={onClose}>
       <Modal.Header>Get started</Modal.Header>
       <Modal.Body>
         <Form
           // remount the form every time to refresh validation
-          key={show ? "1" : "0"}
+          // key={show ? "1" : "0"}
           noValidate
           validated={validated}
           onSubmit={handleSubmit}

@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Col, Form, InputGroup, Modal } from "react-bootstrap";
 import "./index.scss";
 import type { URLPayload, URLUnit } from "./interface";
+import CreateModal from "./CreateModal";
 
 const mock = (payload: URLPayload): Promise<URLUnit> =>
   new Promise((r) =>
@@ -13,25 +14,9 @@ const mock = (payload: URLPayload): Promise<URLUnit> =>
 const Landing: React.FunctionComponent = () => {
   const [show, setShow] = React.useState(false);
 
-  const [validated, setValidated] = React.useState(false);
+  const handleClose = () => setShow(false);
 
-  const [data, setData] = React.useState<URLPayload>({ url: "", id: "" });
-
-  const handleClose = () => {
-    setData({ url: "", id: "" });
-    setShow(false);
-    setValidated(false);
-  };
   const handleShow = () => setShow(true);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const res = await mock(data);
-
-    setValidated(true);
-  };
 
   return (
     <>
@@ -41,44 +26,7 @@ const Landing: React.FunctionComponent = () => {
           Start Now
         </Button>
       </div>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header>Get started</Modal.Header>
-        <Modal.Body>
-          <Form
-            // remount the form every time to refresh validation
-            key={show ? "1" : "0"}
-            noValidate
-            validated={validated}
-            onSubmit={handleSubmit}
-          >
-            <InputGroup className="mb-3">
-              <Form.Control
-                required
-                value={data.url}
-                onChange={(e) => setData({ ...data, url: e.target.value })}
-                placeholder="Target URL"
-                aria-label="URL"
-                aria-describedby="basic-addon2"
-              />
-            </InputGroup>
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="basic-addon1">
-                http://short.ly/
-              </InputGroup.Text>
-              <Form.Control
-                minLength={6}
-                maxLength={8}
-                value={data.id}
-                placeholder="Customized Name (Optional)"
-                aria-label="Id"
-                aria-describedby="basic-addon1"
-                onChange={(e) => setData({ ...data, id: e.target.value })}
-              />
-            </InputGroup>
-            <Button type="submit">Submit form</Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
+      {show && <CreateModal onClose={handleClose} />}
     </>
   );
 };
