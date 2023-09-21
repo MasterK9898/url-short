@@ -1,8 +1,8 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.scss";
+import logo from "../../media/logo.svg";
+import "./index.scss";
 
-function App() {
+const Landing: React.FunctionComponent = () => {
   const url = window.location.href;
   return (
     <div className="App">
@@ -23,6 +23,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
-export default App;
+export default Landing;
