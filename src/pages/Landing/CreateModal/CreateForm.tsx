@@ -8,6 +8,8 @@ import * as yup from "yup";
 import type { URLPayload, URLUnit } from "../interface";
 import { createShortURL } from "../utils/api";
 
+import "./index.scss";
+
 const schema = yup.object().shape({
   url: yup.string().required(),
   id: yup.string().max(8).min(6),
@@ -24,7 +26,6 @@ const CreateForm: React.FunctionComponent = () => {
 
   const [loading, setLoading] = React.useState(false);
 
-  // this function depends on nothing, so using use callback is a good choice
   const handleSubmit = React.useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       setValidated(true);
@@ -43,7 +44,7 @@ const CreateForm: React.FunctionComponent = () => {
 
       setLoading(false);
     },
-    []
+    [form]
   );
 
   return (
