@@ -7,7 +7,6 @@ import classNames from "classnames";
 
 import logo from "../../media/logo.svg";
 import "./index.scss";
-import Manage from "../../components/Manage";
 
 type LandingSection = {
   title: string;
@@ -38,7 +37,9 @@ const Landing: React.FunctionComponent = () => {
             title="Create your short URL in 1 minute"
             text="Quick Start"
           />
-          <Manage />
+          <Button className={classNames("dashbord")} href="/mine">
+            Dashboard
+          </Button>
         </div>
       </div>
       {sections.map((section, index) => (

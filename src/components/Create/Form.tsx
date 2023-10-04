@@ -5,12 +5,12 @@ import { Button, Form, InputGroup, Spinner } from "react-bootstrap";
 
 import * as yup from "yup";
 
-import type { URLPayload, URLUnit } from "../../pages/Landing/interface";
+import type { URLPayload, URLUnit } from "../../interface";
 import { createShortURL } from "../../utils/api";
 
 import "./index.scss";
 import classNames from "classnames";
-import URLDisplay from "../URLDisplay/";
+import URLDisplay from "./URLDisplay";
 
 const schema = yup.object().shape({
   url: yup.string().required(),

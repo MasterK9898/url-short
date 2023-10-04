@@ -11,7 +11,7 @@ import copy from "../../media/copy.svg";
 import tick from "../../media/tick.svg";
 import qrcode from "../../media/qrcode.svg";
 
-import type { URLUnit } from "../../pages/Landing/interface";
+import type { URLUnit } from "../../interface";
 
 interface CreateResultProps {
   data: URLUnit;
@@ -48,11 +48,7 @@ const CreateResult: React.FunctionComponent<CreateResultProps> = ({ data }) => {
         }
       />
       {copied && (
-        <img
-          className={classNames("operation", "success")}
-          src={tick}
-          onClick={() => navigator.clipboard.writeText(data.id)}
-        />
+        <img className={classNames("operation", "success")} src={tick} />
       )}
     </div>
   );

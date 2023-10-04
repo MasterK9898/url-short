@@ -1,7 +1,59 @@
 .mine {
   min-height: 100vh;
 
+  .url {
+    max-width: 20vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .create {
-    margin: 24px 0 0 24px;
+    margin: 24px;
+  }
+
+  .table-display {
+    width: calc(100% - 48px);
+    margin-left: 24px;
+    * {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .operation {
+      width: 24px;
+      height: 24px;
+      margin-right: 6px;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    .success {
+      width: 24px;
+      height: 24px;
+
+      visibility: hidden;
+
+      &.show {
+        visibility: visible;
+      }
+    }
+
+    &.table-striped {
+      tbody > {
+        :nth-of-type(odd) > * {
+          background-color: var(--background-2);
+        }
+        :nth-of-type(even) > * {
+          background-color: var(--background-1);
+        }
+      }
+
+      th {
+        background-color: var(--background-1);
+      }
+    }
   }
 }

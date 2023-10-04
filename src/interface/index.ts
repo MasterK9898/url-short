@@ -5,6 +5,7 @@ export interface URLUnit {
   _id: string; // mongoDB id
   id: string; // the shortened url name
   url: string; // the original url
+  expire: Date; // the expiration timestamp
 }
 
 /**
