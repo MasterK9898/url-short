@@ -1,26 +1,16 @@
 import React from "react";
 
 import { Formik } from "formik";
-import {
-  Button,
-  Form,
-  InputGroup,
-  OverlayTrigger,
-  Popover,
-  Spinner,
-} from "react-bootstrap";
-import { QRCodeSVG } from "qrcode.react";
+import { Button, Form, InputGroup, Spinner } from "react-bootstrap";
 
 import * as yup from "yup";
 
-import type { URLPayload, URLUnit } from "../interface";
-import { createShortURL } from "../utils/api";
+import type { URLPayload, URLUnit } from "../../pages/Landing/interface";
+import { createShortURL } from "../../utils/api";
 
 import "./index.scss";
-import copy from "../../../media/copy.svg";
-import qrcode from "../../../media/qrcode.svg";
 import classNames from "classnames";
-import CreateResult from "./CreateResult";
+import URLDisplay from "../URLDisplay/";
 
 const schema = yup.object().shape({
   url: yup.string().required(),
@@ -28,8 +18,6 @@ const schema = yup.object().shape({
 });
 
 const initForm: URLPayload = { url: "", id: "" };
-
-const domain = "http://short.ly";
 
 const CreateForm: React.FunctionComponent = () => {
   const [validated, setValidated] = React.useState(false);
@@ -78,7 +66,7 @@ const CreateForm: React.FunctionComponent = () => {
             aria-describedby="basic-addon2"
           />
         </InputGroup>
-        <InputGroup className="mb-3">
+        {/* <InputGroup className="mb-3">
           <InputGroup.Text id="basic-addon1">{domain}</InputGroup.Text>
           <Form.Control
             minLength={6}
@@ -89,9 +77,9 @@ const CreateForm: React.FunctionComponent = () => {
             aria-describedby="basic-addon1"
             onChange={(e) => setForm({ ...form, id: e.target.value })}
           />
-        </InputGroup>
+        </InputGroup> */}
         {data ? (
-          <CreateResult data={data} />
+          <URLDisplay data={data} />
         ) : loading ? (
           <Spinner animation="grow" className={classNames("loading")} />
         ) : (

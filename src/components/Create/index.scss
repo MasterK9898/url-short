@@ -45,30 +45,6 @@
 
       border-radius: 1000px;
     }
-
-    .result {
-      display: flex;
-      align-items: center;
-
-      > * {
-        margin-right: 6px;
-      }
-
-      .operation {
-        width: 24px;
-        height: 24px;
-
-        &:hover {
-          opacity: 0.8;
-        }
-
-        cursor: pointer;
-      }
-
-      .success {
-        animation: fadeIn 0.5s;
-      }
-    }
   }
 }
 
@@ -88,5 +64,21 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+.create {
+  background-color: var(--theme) !important;
+  border: 1px solid var(--theme) !important;
+
+  font-weight: 700;
+  font-size: 17px;
+
+  padding: 12px 24px;
+
+  border-radius: 1000px;
+
+  &:hover {
+    opacity: 0.8;
   }
 }

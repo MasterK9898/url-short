@@ -1,11 +1,13 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import CreateModal from "./CreateModal";
+import Create from "../../components/Create";
+import Header from "../../components/Header";
 
 import classNames from "classnames";
 
 import logo from "../../media/logo.svg";
 import "./index.scss";
+import Manage from "../../components/Manage";
 
 type LandingSection = {
   title: string;
@@ -25,36 +27,18 @@ const sections: Array<LandingSection> = [
 ];
 
 const Landing: React.FunctionComponent = () => {
-  const [show, setShow] = React.useState(false);
-
-  const [overflow, setOverflow] = React.useState(false);
-
-  React.useEffect(() => {
-    window.addEventListener("scroll", () => {
-      setOverflow(window.scrollY > 0);
-    });
-  }, []);
-
   return (
     <div className={classNames("landing")}>
-      {show && <CreateModal onClose={() => setShow(false)} />}
-      <div className={classNames("header", overflow && "overflow")}>
-        <img src={logo} className={classNames("logo")} />
-        <div className={classNames("title")}>URL Shortener</div>
-        <Button className={classNames("link")}>Learn</Button>
-        <Button className={classNames("link")}>Community</Button>
-        <Button className={classNames("link")}>About Us</Button>
-      </div>
+      <Header />
       <div className={classNames("intro")}>
         <img src={logo} className={classNames("logo")} />
         <div className={classNames("title")}>URL Shortener</div>
         <div className={classNames("button-holder")}>
-          <Button className={classNames("start")} onClick={() => setShow(true)}>
-            Quick Start
-          </Button>
-          <Button className={classNames("dashbord")} href="/mine">
-            Dashboard
-          </Button>
+          <Create
+            title="Create your short URL in 1 minute"
+            text="Quick Start"
+          />
+          <Manage />
         </div>
       </div>
       {sections.map((section, index) => (

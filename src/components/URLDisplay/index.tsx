@@ -3,15 +3,15 @@ import * as React from "react";
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import { QRCodeSVG } from "qrcode.react";
 
-import { domain } from "../utils/const";
+import { domain } from "../../utils/const";
 import classNames from "classnames";
 
 import "./index.scss";
-import copy from "../../../media/copy.svg";
-import tick from "../../../media/tick.svg";
-import qrcode from "../../../media/qrcode.svg";
+import copy from "../../media/copy.svg";
+import tick from "../../media/tick.svg";
+import qrcode from "../../media/qrcode.svg";
 
-import type { URLUnit } from "../interface";
+import type { URLUnit } from "../../pages/Landing/interface";
 
 interface CreateResultProps {
   data: URLUnit;
@@ -22,7 +22,7 @@ const CreateResult: React.FunctionComponent<CreateResultProps> = ({ data }) => {
 
   const url = `${domain}${data.id}`;
   return (
-    <div className={classNames("result")}>
+    <div className={classNames("display")}>
       <div>Your short URL is: {url}</div>
       <OverlayTrigger
         trigger="hover"
@@ -41,7 +41,10 @@ const CreateResult: React.FunctionComponent<CreateResultProps> = ({ data }) => {
         className={classNames("operation")}
         src={copy}
         onClick={() =>
-          navigator.clipboard.writeText(data.id).then(() => setCopied(true))
+          navigator.clipboard.writeText(data.id).then(() => {
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1000);
+          })
         }
       />
       {copied && (

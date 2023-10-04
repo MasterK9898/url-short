@@ -12,55 +12,7 @@
   }
 
   .header {
-    position: sticky;
-    top: 0;
     background-color: var(--background-1);
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 20px;
-
-    height: 64px;
-
-    border-bottom: 1px solid var(--background-1);
-
-    &.overflow {
-      border-bottom: 1px solid var(--border);
-    }
-
-    .logo {
-      width: 48px;
-      height: 48px;
-      // display: block;
-    }
-
-    .title {
-      font-size: 24px;
-      font-weight: 600;
-
-      color: var(--white);
-
-      margin-right: auto;
-
-      margin-left: 12px;
-    }
-
-    .link {
-      background-color: transparent;
-      border: 0;
-
-      border-radius: 1000px;
-
-      font-size: 15px;
-      font-weight: 500;
-
-      margin-left: 12px;
-
-      &:hover {
-        background-color: var(--border);
-      }
-    }
   }
 
   .intro {
@@ -91,7 +43,10 @@
         margin-left: 12px;
       }
 
-      > * {
+      .dashbord {
+        background-color: transparent;
+        border: 1px solid var(--white);
+
         font-weight: 700;
         font-size: 17px;
 
@@ -102,16 +57,6 @@
         &:hover {
           opacity: 0.8;
         }
-      }
-
-      .start {
-        background-color: var(--theme);
-        border: 1px solid var(--theme);
-      }
-
-      .dashbord {
-        background-color: transparent;
-        border: 1px solid var(--white);
       }
     }
   }
