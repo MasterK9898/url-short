@@ -7,6 +7,23 @@ import classNames from "classnames";
 import logo from "../../media/logo.svg";
 import "./index.scss";
 
+type LandingSection = {
+  title: string;
+  desc: string;
+  img?: string;
+};
+
+const sections: Array<LandingSection> = [
+  {
+    title: "Shorten Your URL",
+    desc: "Transform lengthy links into concise, shareable URLs with our platform. Elevate your branding and simplify sharing with intuitive alias URLs.",
+  },
+  {
+    title: "Low Latency & Planetwise Consistency",
+    desc: "Use a global database service that supports data replication across different geographic regions.",
+  },
+];
+
 const Landing: React.FunctionComponent = () => {
   const [show, setShow] = React.useState(false);
 
@@ -40,10 +57,12 @@ const Landing: React.FunctionComponent = () => {
           </Button>
         </div>
       </div>
-      <div className={classNames("section")}>
-        <div className="title">Section 1 Section 1 Section 1</div>
-        <div className="desc">desc desc desc</div>
-      </div>
+      {sections.map((section, index) => (
+        <div key={index} className={classNames("section")}>
+          <div className="title">{section.title}</div>
+          <div className="desc">{section.desc}</div>
+        </div>
+      ))}
     </div>
   );
 };

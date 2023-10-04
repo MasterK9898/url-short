@@ -1,20 +1,92 @@
 .create-form {
-  * {
-    background-color: rgba(35, 39, 47);
-
-    color: rgb(255, 255, 255);
-  }
-
   input {
     &::placeholder {
-      color: rgb(255, 255, 255);
+      color: var(--white);
     }
 
     &:focus {
-      background-color: rgba(35, 39, 47);
+      background-color: var(--background-1);
     }
   }
+
+  .modal-dialog {
+    margin-top: 10%;
+  }
   .modal-content {
-    border: 1px solid rgba(246, 247, 249, 0.05);
+    border: 1px solid var(--white);
+
+    border-radius: 6px;
+    overflow: hidden;
+
+    * {
+      background-color: var(--background-1);
+
+      color: var(--white);
+
+      font-weight: 600;
+    }
+
+    .header {
+      font-size: 20px;
+    }
+
+    .loading {
+      background-color: var(--theme);
+    }
+
+    .submit {
+      background-color: var(--theme);
+
+      border: var(--theme);
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      border-radius: 1000px;
+    }
+
+    .result {
+      display: flex;
+      align-items: center;
+
+      > * {
+        margin-right: 6px;
+      }
+
+      .operation {
+        width: 24px;
+        height: 24px;
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        cursor: pointer;
+      }
+
+      .success {
+        animation: fadeIn 0.5s;
+      }
+    }
+  }
+}
+
+.qrcode-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .qrcode {
+    padding: 12px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

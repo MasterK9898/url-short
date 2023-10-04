@@ -1,7 +1,15 @@
 import React from "react";
 
 import { Formik } from "formik";
-import { Button, Form, InputGroup, Spinner } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  InputGroup,
+  OverlayTrigger,
+  Popover,
+  Spinner,
+} from "react-bootstrap";
+import { QRCodeSVG } from "qrcode.react";
 
 import * as yup from "yup";
 
@@ -9,18 +17,24 @@ import type { URLPayload, URLUnit } from "../interface";
 import { createShortURL } from "../utils/api";
 
 import "./index.scss";
+import copy from "../../../media/copy.svg";
+import qrcode from "../../../media/qrcode.svg";
+import classNames from "classnames";
+import CreateResult from "./CreateResult";
 
 const schema = yup.object().shape({
   url: yup.string().required(),
   id: yup.string().max(8).min(6),
 });
 
+const initForm: URLPayload = { url: "", id: "" };
+
 const domain = "http://short.ly";
 
 const CreateForm: React.FunctionComponent = () => {
   const [validated, setValidated] = React.useState(false);
 
-  const [form, setForm] = React.useState<URLPayload>({ url: "", id: "" });
+  const [form, setForm] = React.useState<URLPayload>(initForm);
 
   const [data, setData] = React.useState<URLUnit | null>(null);
 
@@ -51,10 +65,7 @@ const CreateForm: React.FunctionComponent = () => {
     <Formik
       validationSchema={schema}
       onSubmit={console.log}
-      initialValues={{
-        url: "",
-        id: "",
-      }}
+      initialValues={initForm}
     >
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <InputGroup className="mb-3">
@@ -62,7 +73,7 @@ const CreateForm: React.FunctionComponent = () => {
             required
             value={form.url}
             onChange={(e) => setForm({ ...form, url: e.target.value })}
-            placeholder="Target URL"
+            placeholder="URL"
             aria-label="URL"
             aria-describedby="basic-addon2"
           />
@@ -73,27 +84,20 @@ const CreateForm: React.FunctionComponent = () => {
             minLength={6}
             maxLength={8}
             value={form.id}
-            placeholder="Customized Name (Optional)"
+            placeholder="Name (Optional, 6-8 characters)"
             aria-label="Id"
             aria-describedby="basic-addon1"
             onChange={(e) => setForm({ ...form, id: e.target.value })}
           />
         </InputGroup>
         {data ? (
-          <>
-            Your short URL is: {domain}
-            {data.id}{" "}
-            <Button
-              variant="primary"
-              onClick={() => navigator.clipboard.writeText(data.id)}
-            >
-              Copy
-            </Button>
-          </>
+          <CreateResult data={data} />
         ) : loading ? (
-          <Spinner animation="grow" />
+          <Spinner animation="grow" className={classNames("loading")} />
         ) : (
-          <Button type="submit">Submit form</Button>
+          <Button className="submit" type="submit">
+            Let's do it!!
+          </Button>
         )}
       </Form>
     </Formik>
