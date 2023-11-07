@@ -25,8 +25,16 @@ const PlanCard: React.FunctionComponent<PlanCardProps> = ({ planDetails, member 
                 </ul>
             </Card.Body>
             <div className={classNames("plan-price")}>
-                    {planDetails.price === 0 ? "Free" : `${planDetails.price} /mo.`}
+                {
+                    planDetails.price === 0
+                        ? "Free"
+                        : <>
+                            {`${planDetails.price} /mo. `}
+                            <span style={{fontSize: '16px'}}>+ tax</span>
+                        </>
+                }
             </div>
+
             <Card.Footer className={classNames("plan-footer")}>
             <Button
                 className={classNames(`plan-${planDetails.id}-confirm`)}
@@ -35,7 +43,7 @@ const PlanCard: React.FunctionComponent<PlanCardProps> = ({ planDetails, member 
                 {
                     planDetails.id === member.currentPlan
                         ? "Current Plan"
-                        : (planDetails.id === 0 ? "Get Free Version" : "Purchase Membership")
+                        : (planDetails.id === 0 ? "Get Free Version" : "Get Membership")
                 }
             </Button>
 

@@ -1,0 +1,86 @@
+/* Login Container */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px; // Padding to ensure contents are not too close to screen edges
+}
+
+/* Login Card */
+.login-card {
+    max-width: 400px;
+    width: 100%;
+    margin: 15px 0;
+    padding: 25px; // Inner padding for breathing space
+    background: #ffffff;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08); // Softened the shadow for a modern look
+
+    .login-title {
+        font-size: 26px; // Slightly increased for prominence
+        font-weight: 600; // Not too bold
+        text-align: center;
+        margin-bottom: 25px;
+        color: #2f3a56;
+    }
+
+    .label-text {
+        font-size: 16px;
+        color: #2f3a56;
+        margin-bottom: 8px;
+    }
+
+    .input-field {
+        padding: 12px 15px; // Increased padding for comfort
+        font-size: 16px;
+        width: 100%; // Ensuring full width
+        border: 1px solid #d1d9e2; // Softer border color
+        border-radius: 6px; // Slightly rounded for aesthetics
+        margin-bottom: 18px; // Increased spacing
+
+        &:focus {
+            outline: none; // Removing the default outline
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 14px; // Balanced padding
+        font-size: 18px;
+        border-radius: 6px;
+        background-color: #282c34;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+
+        &:hover, &:focus {
+            background-color: var(--background-2);
+            transform: scale(0.98);
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+}
+
+/* Member Purchase Prompt */
+.member-purchase-prompt {
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 25px;
+
+    .member-purchase {
+        color: #f0f0f0;
+        font-weight: 800;
+        cursor: pointer;
+
+        &:hover, &:focus {
+            text-decoration: underline;
+        }
+    }
+}

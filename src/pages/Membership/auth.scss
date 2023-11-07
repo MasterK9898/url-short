@@ -1,0 +1,107 @@
+$theme-color: #282c34;
+
+.login-container,
+.register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $theme-color;
+    height: 100vh;
+    padding: 2rem;
+}
+
+.login-card,
+.register-card {
+    width: 80%;
+    max-width: 500px;
+    margin-top: 2rem;
+    background-color: lighten($theme-color, 10%);
+
+    .login-title,
+    .register-title {
+        color: lighten($theme-color, 50%);
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.input-field {
+    background-color: lighten($theme-color, 5%);
+    border: 1px solid lighten($theme-color, 15%);
+    color: lighten($theme-color, 50%) !important;
+
+    &:focus {
+        outline-color: lighten($theme-color, 20%);
+        background-color: lighten($theme-color, 5%); // ensures background stays consistent
+        box-shadow: 0 0 0 0.2rem rgba(lighten($theme-color, 20%), 0.25); // subtle glow for focus
+    }
+}
+
+.label-text {
+    color: lighten($theme-color, 40%);
+    margin-bottom: 0.5rem;
+}
+
+.login-btn,
+.register-btn {
+    display: block;
+    width: 100%;
+    margin-top: 1.5rem;
+    background-color: lighten($theme-color, 20%);
+    border: none;
+    position: relative; // to position pseudo-elements relative to the button
+    overflow: hidden; // to hide pseudo-elements when they're outside the button
+    text-align: center; // to ensure the content stays centered
+
+    &::before, &::after {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0;
+        transition: opacity 0.3s, left 0.3s, right 0.3s;
+    }
+
+    &::before {
+        content: ">>";
+        left: -25px; // starts outside the button
+    }
+
+    &::after {
+        content: "<<";
+        right: -25px; // starts outside the button
+    }
+
+    &:hover {
+        &::before {
+            opacity: 1;
+            left: 10px; // moves the symbol inside the button
+        }
+
+        &::after {
+            opacity: 1;
+            right: 10px; // moves the symbol inside the button
+        }
+    }
+
+    &:hover, &:focus {
+        background-color: lighten($theme-color, 25%) !important;
+    }
+}
+
+.member-purchase-prompt,
+.already-member-prompt {
+    color: lighten($theme-color, 40%);
+    margin-top: 1rem;
+    cursor: pointer;
+
+    .member-purchase {
+        cursor: pointer;
+        color: lighten($theme-color, 25%);
+
+        &:hover {
+            text-decoration: underline;
+            color: lighten($theme-color, 20%);
+        }
+    }
+}
