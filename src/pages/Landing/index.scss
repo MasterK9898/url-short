@@ -36,14 +36,20 @@
       height: 96px;
     }
 
-    .button-holder {
+    .holder {
       margin-top: 12px;
 
-      :last-child {
-        margin-left: 12px;
-      }
+      align-items: center;
+
+      display: flex;
+      flex-direction: column;
+
+      // :last-child {
+      //   margin-left: 12px;
+      // }
 
       .dashbord {
+        width: 240px;
         background-color: transparent;
         border: 1px solid var(--white);
 

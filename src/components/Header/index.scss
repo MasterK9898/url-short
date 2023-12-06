@@ -1,4 +1,5 @@
 .header {
+  z-index: 1000;
   position: sticky;
   top: 0;
   background-color: var(--background-1);
@@ -50,6 +51,21 @@
   }
 
   .link:last-child {
-    color: #FFD700;
+    color: #ffd700;
+  }
+}
+
+.user-dropdown-menu {
+  background-color: var(--background-1);
+  color: var(--white);
+
+  .dropdown-item {
+    color: var(--white);
+
+    &:hover {
+      background-color: var(--background-1);
+
+      opacity: 0.8;
+    }
   }
 }

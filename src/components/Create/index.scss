@@ -1,52 +1,74 @@
 .create-form {
-  input {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  input,
+  textarea {
+    color: var(--white);
+
     &::placeholder {
       color: var(--white);
     }
 
     &:focus {
       background-color: var(--background-1);
-    }
-  }
-
-  .modal-dialog {
-    margin-top: 10%;
-  }
-  .modal-content {
-    border: 1px solid var(--white);
-
-    border-radius: 6px;
-    overflow: hidden;
-
-    * {
-      background-color: var(--background-1);
-
       color: var(--white);
+    }
+  }
 
-      font-weight: 600;
+  .textarea {
+    width: 480px;
+    height: 200px;
+  }
+
+  .input {
+    width: 480px;
+    height: 40px;
+  }
+
+  // .modal-dialog {
+  //   margin-top: 10%;
+  // }
+  // .modal-content {
+  // border: 1px solid var(--white);
+
+  border-radius: 6px;
+  overflow: hidden;
+
+  * {
+    background-color: var(--background-1);
+
+    color: var(--white);
+
+    font-weight: 600;
+  }
+
+  .header {
+    font-size: 20px;
+  }
+
+  .loading {
+    background-color: var(--theme);
+
+    margin: 0 24px;
+  }
+
+  .submit {
+    background-color: var(--theme);
+
+    border: var(--theme);
+
+    &:hover {
+      opacity: 0.8;
     }
 
-    .header {
-      font-size: 20px;
-    }
-
-    .loading {
-      background-color: var(--theme);
-    }
-
-    .submit {
-      background-color: var(--theme);
-
-      border: var(--theme);
-
-      &:hover {
-        opacity: 0.8;
-      }
-
-      border-radius: 1000px;
-    }
+    border-radius: 1000px;
   }
 }
+// }
 
 .qrcode-holder {
   display: flex;
@@ -68,6 +90,8 @@
 // }
 
 .create {
+  margin-top: 12px;
+  width: 240px;
   background-color: var(--theme) !important;
   border: 1px solid var(--theme) !important;
 
@@ -81,41 +105,4 @@
   &:hover {
     opacity: 0.8;
   }
-}
-
-.display {
-  display: flex;
-  align-items: center;
-
-  color: var(--white);
-  font-weight: 600;
-
-  > * {
-    margin-right: 6px;
-  }
-
-  .operation {
-    width: 24px;
-    height: 24px;
-    margin-right: 6px;
-    cursor: pointer;
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-
-  .success {
-    width: 24px;
-    height: 24px;
-
-    visibility: hidden;
-
-    &.show {
-      visibility: visible;
-    }
-  }
-
-  // .success {
-  //   animation: fadeIn 0.5s;
-  // }
 }

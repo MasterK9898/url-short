@@ -7,6 +7,11 @@ import classNames from "classnames";
 
 import logo from "../../media/logo.svg";
 import "./index.scss";
+import { useNavigate } from "react-router-dom";
+import { URLUnit } from "../../interface";
+import Display from "./Display";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 type LandingSection = {
   title: string;
@@ -26,20 +31,40 @@ const sections: Array<LandingSection> = [
 ];
 
 const Landing: React.FunctionComponent = () => {
+  const navigate = useNavigate();
+
+  const [urls, setURLs] = React.useState<Array<URLUnit>>([]);
+
+  const [showModal, setShowModal] = React.useState(false);
+
+  const { value } = useSelector((state: RootState) => state.user);
+
   return (
     <div className={classNames("landing")}>
       <Header />
+      <Display
+        urls={urls}
+        show={showModal}
+        handleClose={() => setShowModal(false)}
+      />
       <div className={classNames("intro")}>
         <img src={logo} className={classNames("logo")} />
         <div className={classNames("title")}>URL Shortener</div>
-        <div className={classNames("button-holder")}>
+        <div className={classNames("holder")}>
           <Create
-            title="Create your short URL in 1 minute"
-            text="Quick Start"
+            onCreated={(data) => {
+              setURLs(data);
+              setShowModal(true);
+            }}
           />
-          <Button className={classNames("dashbord")} href="/mine">
-            Dashboard
-          </Button>
+          {value && (
+            <Button
+              className={classNames("dashbord")}
+              onClick={() => navigate("/mine")}
+            >
+              Dashboard
+            </Button>
+          )}
         </div>
       </div>
       {sections.map((section, index) => (

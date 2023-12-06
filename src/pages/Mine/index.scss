@@ -1,15 +1,26 @@
 .mine {
   min-height: 100vh;
 
+  .loading-table {
+    margin-left: calc(50% - 16px);
+    margin-top: 10%;
+
+    color: var(--theme);
+
+    zoom: 2;
+  }
+
   .url {
-    max-width: 20vw;
+    max-width: 30vw;
+    width: 30vw;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   .create {
-    margin: 24px;
+    margin-left: 24px;
+    margin-top: 0;
   }
 
   .table-display {
@@ -54,6 +65,61 @@
       th {
         background-color: var(--background-1);
       }
+    }
+  }
+}
+
+.checkbox {
+  // width: 20px;
+  height: 100%;
+}
+.create-horizontal {
+  flex-direction: row;
+
+  padding: 24px 26px 0;
+}
+
+.filter-bar {
+  * {
+    font-weight: 500;
+    color: var(--background-1);
+  }
+
+  .filter-button {
+    background-color: var(--theme) !important;
+    border: var(--theme);
+
+    color: var(--white);
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.6;
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+
+  margin-left: auto;
+
+  margin-right: 12px;
+
+  .page-item {
+    &.active {
+      .page-link {
+        background-color: var(--theme);
+        border: 1px solid var(--theme);
+
+        color: var(--white);
+      }
+    }
+
+    .page-link {
+      color: var(--theme);
     }
   }
 }
