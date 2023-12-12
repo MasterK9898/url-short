@@ -1,0 +1,9 @@
+dispatch:
+  - url: "team4-539.com/api/*"
+    service: team4
+  - url: "team4-539.com/shortenurl/*"
+    service: team4
+  - url: "team4-539.com/api/user"
+    service: team4
+  - url: "team4-539.com/*"
+    service: team4-fe

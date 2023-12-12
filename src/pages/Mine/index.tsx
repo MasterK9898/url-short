@@ -58,16 +58,14 @@ const Mine: React.FunctionComponent = () => {
     abortController.current = new AbortController();
     setSelected([]);
     setLoading(true);
-    console.log("cookies", document.cookie);
     getShortURLs(filter, abortController.current.signal)
       .then(({ data, total }) => {
         setUrls(data);
         setTotal(total);
-      })
-      .catch(() => {})
-      .finally(() => {
+        // if failed, it will oad forever
         setLoading(false);
-      });
+      })
+      .catch(() => {});
   }, []);
 
   const debounceGetURLs = React.useMemo(() => debounce(getURLs, 300), []);

@@ -39,7 +39,10 @@ const Header: React.FunctionComponent = () => {
     <div className={classNames("header", overflow && "overflow")}>
       <img src={logo} alt="logo" className={classNames("logo")} />
       <div className={classNames("title")}>URL Shortener</div>
-      <Button className={classNames("link")} href="/landing">
+      <Button
+        className={classNames("link")}
+        onClick={() => navigate("/landing")}
+      >
         Home
       </Button>
       <Button className={classNames("link")}>Learn</Button>

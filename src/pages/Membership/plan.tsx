@@ -3,10 +3,11 @@ import { Card, Button } from "react-bootstrap";
 import classNames from "classnames";
 import { MembershipDetail } from ".";
 import { Tier, User } from "../../interface/user";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, login as loginAction } from "../../store";
 import { useNavigate } from "react-router-dom";
-import { subscribe } from "../../utils/api";
+import { getUser, subscribe } from "../../utils/api";
+import { handleError } from "../../utils/error";
 
 interface PlanCardProps {
   planDetails: MembershipDetail;
@@ -16,6 +17,7 @@ const rank = [Tier.Bronze, Tier.Silver, Tier.Gold];
 
 const PlanCard: React.FunctionComponent<PlanCardProps> = ({ planDetails }) => {
   const { value } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   React.useEffect(() => {
@@ -65,7 +67,14 @@ const PlanCard: React.FunctionComponent<PlanCardProps> = ({ planDetails }) => {
         <Button
           className={classNames(`plan-${planDetails.id}-confirm`)}
           onClick={() => {
-            subscribe(planDetails.version);
+            subscribe(planDetails.version)
+              .then(() => getUser())
+              .then((res) => {
+                dispatch(loginAction(res));
+              })
+              .catch((e) => {
+                handleError(e);
+              });
           }}
           disabled={disabled}
         >

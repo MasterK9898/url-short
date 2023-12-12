@@ -6,7 +6,7 @@ import { Tier, type LoginPayload, type User } from "../interface/user";
 // TODO configure proxy
 
 export const login = (payload: LoginPayload): Promise<User> =>
-  axios.post("/login", { ...payload }).then(() => ({
+  axios.post("/api/login", { ...payload }).then(() => ({
     email: payload.email,
     tier: Tier.Gold,
   }));
@@ -14,13 +14,13 @@ export const login = (payload: LoginPayload): Promise<User> =>
 export const logout = (): Promise<void> => axios.put("/logout");
 
 export const register = (payload: LoginPayload): Promise<User> =>
-  axios.post("/user", { ...payload }).then(() => ({
+  axios.post("/api/user", { ...payload }).then(() => ({
     email: payload.email,
     tier: Tier.Bronze,
   }));
 
 export const createShortURL = (target: string): Promise<URLUnit> =>
-  axios.post("/shortenurl", { url: target }).then(({ data }) => ({
+  axios.post("/api/shortenurl", { url: target }).then(({ data }) => ({
     expire: new Date(data.expireDate),
     longURL: data.longUrl,
     shortURL: data.shortUrl,
@@ -28,10 +28,23 @@ export const createShortURL = (target: string): Promise<URLUnit> =>
     id: data.shortUrl.split("/").pop() as string,
   }));
 
-// there'no api for bulk create short url, so we have to call the api one by one
 export const bulkCreateShortURL = (
   targets: Array<string>
-): Promise<Array<URLUnit>> => Promise.all(targets.map(createShortURL));
+): Promise<Array<URLUnit>> =>
+  axios
+    .post(
+      "/api/bulk/shortenurl",
+      targets.map((target) => ({ url: target }))
+    )
+    .then(({ data }) =>
+      data.map((item: any) => ({
+        expire: new Date(item.expireDate),
+        longURL: item.longUrl,
+        shortURL: item.shortUrl,
+        create: new Date(),
+        id: item.shortUrl.split("/").pop() as string,
+      }))
+    );
 
 // backend doesn't support filtering, we can do it locally
 export const getShortURLs = (
@@ -39,14 +52,12 @@ export const getShortURLs = (
   signal?: AbortSignal
 ): Promise<{ data: Array<URLUnit>; total: number }> => {
   console.trace();
-  return axios.get("/shortenurls", { signal }).then(
+  return axios.get("/api/shortenurls", { signal }).then(
     ({ data }) => {
       const res: Array<URLUnit> = data.map((item: any) => ({
         expire: new Date(item.expireDate),
         longURL: item.longUrl,
-        shortURL:
-          "https://team4-dot-rice-comp-539-spring-2022.uk.r.appspot.com/" +
-          item.shortUrl,
+        shortURL: "http://team4-539.com/shortenurl/" + item.shortUrl,
         create: new Date(item.createDate),
         id: item.shortUrl,
       }));
@@ -86,16 +97,16 @@ export const getShortURLs = (
 };
 
 export const deleteShortURL = (url: string): Promise<void> =>
-  axios.delete("/shortenurl", { params: { url } });
+  axios.delete("/api/shortenurl", { params: { url } });
 
 export const bulkDeleteShortURL = (urls: Array<string>): Promise<void> =>
-  Promise.all(urls.map(deleteShortURL)).then(() => {});
+  axios.delete("/api/bulk/url", { data: urls });
 
 export const getUser = (): Promise<User> =>
-  axios.get("/user").then(({ data }) => ({
+  axios.get("/api/user").then(({ data }) => ({
     email: data.email,
     tier: data.tier,
   }));
 
 export const subscribe = (tier: Tier): Promise<void> =>
-  axios.put("/subscribe", { tier });
+  axios.put("/api/subscribe", { tier });

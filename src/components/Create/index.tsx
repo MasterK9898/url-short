@@ -57,20 +57,27 @@ const Create: React.FunctionComponent<CreateProps> = ({
     ? "Enter multiple URLs here (separated by comma)"
     : "Enter your URL here";
 
-  const createURL = React.useCallback((payload: Array<string>) => {
-    setLoading(true);
+  const createURL = React.useCallback(
+    (payload: Array<string>) => {
+      setLoading(true);
 
-    bulkCreateShortURL(payload)
-      .then((res) => {
-        onCreated(res);
-      })
-      .catch((e) => {
-        handleError(e);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+      const promise = isGold
+        ? bulkCreateShortURL(payload)
+        : createShortURL(payload[0]).then((res) => [res]);
+
+      promise
+        .then((res) => {
+          onCreated(res);
+        })
+        .catch((e) => {
+          handleError(e);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    },
+    [isGold, onCreated]
+  );
 
   const handleSubmit = React.useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {

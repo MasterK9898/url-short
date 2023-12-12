@@ -22,7 +22,7 @@ const DisplayUnit: React.FunctionComponent<DisplayUnitProps> = ({ data }) => {
         <div>originURL: {data.longURL}</div>
         <div>shortURL: {data.shortURL}</div>
       </div>
-      <div>
+      <div style={{ minWidth: 60 }}>
         <OverlayTrigger
           trigger="hover"
           placement="top"
